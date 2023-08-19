@@ -1,0 +1,463 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>GitHub Action入门学习 | DoubleW2w🍅</title><meta name="author" content="DoubleW2w"><meta name="copyright" content="DoubleW2w"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本文是作者参考官方文档整理出来的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitHub Action入门学习">
+<meta property="og:url" content="https://doublew2w.cn/posts/d5bae63e.html">
+<meta property="og:site_name" content="DoubleW2w🍅">
+<meta property="og:description" content="本文是作者参考官方文档整理出来的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://doublew2w.cn/images/default_cover_bg1.webp">
+<meta property="article:published_time" content="2023-05-20T09:26:08.000Z">
+<meta property="article:modified_time" content="2023-08-19T05:34:15.726Z">
+<meta property="article:author" content="DoubleW2w">
+<meta property="article:tag" content="Github Actions">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://doublew2w.cn/images/default_cover_bg1.webp"><link rel="shortcut icon" href="/images/favicon-32x32.png"><link rel="canonical" href="https://doublew2w.cn/posts/d5bae63e.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/images/pwaicons/manifest.json"/><link rel="apple-touch-icon" sizes="180x180" href="/images/pwaicons/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/images/pwaicons/favicon-32x32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/images/pwaicons/favicon-16x16.png"/><link rel="mask-icon" href="/images/pwaicons/safari-pinned-tab.svg" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/node-snackbar/0.1.16/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.17/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?69f2c3daaa0562a73e6d145a118ef551";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"T452U752CZ","apiKey":"095493b8ee16d9eb3383fe84a5d9c728","indexName":"hexo","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":200,"languages":{"author":"作者: DoubleW2w","link":"链接: ","source":"来源: DoubleW2w🍅","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"top-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdnjs.cloudflare.com/ajax/libs/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdnjs.cloudflare.com/ajax/libs/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'GitHub Action入门学习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-08-19 13:34:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = 'hidden';
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+
+preloader.initLoading()
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/avatar.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/default_cover_bg1.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="DoubleW2w🍅"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/favicon-32x32.png"/><span class="site-name">DoubleW2w🍅</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">GitHub Action入门学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-20T09:26:08.000Z" title="发表于 2023-05-20 17:26:08">2023-05-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-19T05:34:15.726Z" title="更新于 2023-08-19 13:34:15">2023-08-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="GitHub Action入门学习"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>GitHub Action</h1>
+<blockquote>
+<p>说在前头，所有内容都来自于<a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.github.com/zh/actions">官方文档</a></p>
+</blockquote>
+<p>在 GitHub Actions 的仓库中自动化、自定义和执行软件开发工作流程。 您可以发现、创建和共享操作以执行您喜欢的任何作业（包括 CI/CD），并将操作合并到完全自定义的工作流程中。</p>
+<h2 id="了解-GitHub-Actions">了解 GitHub Actions</h2>
+<h3 id="什么是-GitHub-Action">什么是 GitHub Action</h3>
+<p>可以理解为自动化、自定义执行某一些开发工作流程。比如我们可以创建 Github Actions 来构建和测试存储库的拉取请求或者将合并的拉取请求部署到生产环境中。</p>
+<h3 id="GitHub-Actions-有什么组成部分">GitHub Actions 有什么组成部分</h3>
+<p>GitHub Actions 可以看作是一条条的工作流。每一条工作流按照你配置好的作业流程执行。</p>
+<h4 id="工作流">工作流</h4>
+<p>工作流程是一个可配置的自动化过程，它包含一个或多个作业。</p>
+<p>工作流程在存储库的 <code>.github/workflows</code> 目录中定义，存储库是可以存在多个工作流程，每个工作流程可以执行不同的任何集合。工作流程之间是可以相互引用的</p>
+<h4 id="事件">事件</h4>
+<p>可以触发工作流程的特定活动。比如往存储库推送[push]内容时。</p>
+<h4 id="作业">作业</h4>
+<p>工作流中在同一个运行器上执行的一组步骤。每一个步骤要么是执行脚本，要么是一个将要执行的动作。步骤是按照顺序执行，并且相互依赖。</p>
+<p>作业之间是可以存在依赖关系的，当 A 作业依赖 B 作业时，A 作业就会等待 B 作业完成后，A 作业再运行。</p>
+<h4 id="操作">操作</h4>
+<p>操作是用于 GitHub Actions 平台的自定义应用程序，它执行复杂但经常重复的任务。 使用操作可帮助减少在工作流程文件中编写的重复代码量。</p>
+<h4 id="运行器">运行器</h4>
+<p>触发工作流时运行工作流的服务器。每个运行器一次可以运行一个作业。GitHub 提供 <code>Ubuntu Linux</code>、<code>Microsoft Windows</code> 和 <code>macOS</code> 运行器来运行您的工作流程。</p>
+<h3 id="创建工作流程">创建工作流程</h3>
+<ol>
+<li><code>.github/workflows/</code> 目录下创建 <code>YAML</code> 工作流文件</li>
+<li>往里面添加代码，比如</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 来自于官方文档</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可选 - 工作流的名称，它将显示在 GitHub 存储库的 “Action” 选项卡中。</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">learn-github-actions</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可选 - 工作流运行的名称，该名称将显示在存储库的“Action”选项卡上的工作流运行列表中。</span></span><br><span class="line"><span class="attr">run-name:</span> <span class="string">$&#123;&#123;</span> <span class="string">github.actor</span> <span class="string">&#125;&#125;</span> <span class="string">is</span> <span class="string">learning</span> <span class="string">GitHub</span> <span class="string">Actions</span></span><br><span class="line"><span class="comment"># 此工作流程的触发器，当有人push的时候就会触发</span></span><br><span class="line"><span class="attr">on:</span> [<span class="string">push</span>]</span><br><span class="line"><span class="comment"># 将 learn-github-actions 工作流中运行的所有作业组合在一起。</span></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="comment"># 定义一个名为 check-bats-version 作业。</span></span><br><span class="line">  <span class="attr">check-bats-version:</span></span><br><span class="line">    <span class="comment"># 将作业配置为在最新版本的 Ubuntu Linux 运行器上运行。</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="comment"># 将在 check-bats-version 作业中运行的所有步骤组合在一起。</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">    	<span class="comment"># uses 关键字指定此步骤将运行 actions/checkout 操作的 v3</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v3</span> <span class="comment"># 签出操作</span></span><br><span class="line">      	<span class="comment"># actions/setup-node@v3 操作安装指定的 Node.js 版本</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/setup-node@v3</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="string">&#x27;14&#x27;</span></span><br><span class="line">      	<span class="comment"># run 关键字指示作业在运行器上执行命令。</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">npm</span> <span class="string">install</span> <span class="string">-g</span> <span class="string">bats</span></span><br><span class="line">      	<span class="comment"># 最后，你将使用输出软件版本的参数运行 bats 命令。</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">bats</span> <span class="string">-v</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>提交这些更改并将其推送到您的 GitHub 仓库。</li>
+</ol>
+<h3 id="工作流语法">工作流语法</h3>
+<p>官方语法文档：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#about-yaml-syntax-for-workflows">语法文档</a></p>
+<p>具体可选参数：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on">官方文档：on 的配置参数</a></p>
+<h3 id="查看工作流程活动">查看工作流程活动</h3>
+<ol>
+<li>进入 github 存储库主页，单击 “Action” 选项</li>
+<li>在左侧边栏能看到所有的工作流程</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://doublew2w-myblogimages.oss-cn-hangzhou.aliyuncs.com/img/202305201457891.png" alt=""></p>
+<h2 id="查找和自定义操作">查找和自定义操作</h2>
+<p>GitHub Marketplace 是你用来查找 GitHub 社区创建的操作的中心位置。 利用<a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/marketplace/actions/">GitHub Action 市场</a>页面可按类别筛选操作。</p>
+<h3 id="查找">查找</h3>
+<p>您可以直接在仓库的工作流程编辑器中搜索和浏览操作。 从边栏可以搜索特定的操作、查看特色操作和浏览特色类别。 您也可以查看操作从 GitHub 社区获得的星标数。</p>
+<h3 id="添加操作到工作流程中">添加操作到工作流程中</h3>
+<h4 id="从市场添加">从市场添加</h4>
+<p>如果是从 Github Action 市场中添加操作，通过点击绿色按钮 “Use latest version”来进行添加</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://doublew2w-myblogimages.oss-cn-hangzhou.aliyuncs.com/img/202305201506162.png" alt=""></p>
+<p>将其语法粘贴到自己的工作流程 <code>.yaml</code> 文件中</p>
+<h4 id="从相同仓库添加">从相同仓库添加</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">|-- hello-world (repository)</span><br><span class="line">|   |__ .github</span><br><span class="line">|       └── workflows</span><br><span class="line">|           └── my-first-workflow.yml</span><br><span class="line">|       └── actions</span><br><span class="line">|           |__ hello-world-action</span><br><span class="line">|               └── action.yml</span><br></pre></td></tr></table></figure>
+<p></p>
+<p>可以通过 你可以在工作流文件中通过 <code>&#123;owner&#125;/&#123;repo&#125;@&#123;ref&#125;</code> 或 <code>./path/to/dir</code> 语法引用操作。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jobs:</span></span><br><span class="line">    <span class="attr">build:</span></span><br><span class="line">        <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">        <span class="attr">steps:</span></span><br><span class="line">            <span class="comment"># This step checks out a copy of your repository.</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v3</span></span><br><span class="line">            <span class="comment"># This step references the directory that contains the action.</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">./.github/actions/hello-world-action</span></span><br></pre></td></tr></table></figure>
+<h4 id="从不同仓库添加">从不同仓库添加</h4>
+<p>在工作流文件中通过 <code>&#123;owner&#125;/&#123;repo&#125;@&#123;ref&#125;</code> 语法引用该操作。</p>
+<p>该操作必须存储在公共存储库。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jobs:</span></span><br><span class="line">    <span class="attr">my_first_job:</span></span><br><span class="line">        <span class="attr">steps:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">My</span> <span class="string">first</span> <span class="string">step</span></span><br><span class="line">              <span class="attr">uses:</span> <span class="string">actions/setup-node@v3</span></span><br></pre></td></tr></table></figure>
+<h4 id="引用-docker-Hub-上的容器">引用 docker Hub 上的容器</h4>
+<p>如果操作在 Docker Hub 上发布的 Docker 容器中定义，必须在工作流文件中通过 <code>docker://&#123;image&#125;:&#123;tag&#125;</code> 语法引用该操作。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jobs:</span></span><br><span class="line">    <span class="attr">my_first_job:</span></span><br><span class="line">        <span class="attr">steps:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">My</span> <span class="string">first</span> <span class="string">step</span></span><br><span class="line">              <span class="attr">uses:</span> <span class="string">docker://alpine:3.8</span></span><br></pre></td></tr></table></figure>
+<h4 id="对操作使用输入和输出">对操作使用输入和输出</h4>
+<p>操作通常接受或需要输入并生成可以使用的输出。 例如，操作可能要求您指定文件的路径、标签的名称或它将用作操作处理一部分的其他数据。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://doublew2w-myblogimages.oss-cn-hangzhou.aliyuncs.com/img/202305201512781.png" alt=""></p>
+<p style="text-align:center">图片取自：<a src="https://github.com/actions/setup-node/blob/main/action.yml">setup-node</a></p>
+<p></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">&quot;Example&quot;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&quot;Receives file and generates output&quot;</span></span><br><span class="line"><span class="attr">inputs:</span></span><br><span class="line">    <span class="attr">file-path:</span> <span class="comment"># id of input</span></span><br><span class="line">        <span class="attr">description:</span> <span class="string">&quot;Path to test script&quot;</span></span><br><span class="line">        <span class="attr">required:</span> <span class="literal">true</span></span><br><span class="line">        <span class="attr">default:</span> <span class="string">&quot;test-file.js&quot;</span></span><br><span class="line"><span class="attr">outputs:</span></span><br><span class="line">    <span class="attr">results-file:</span> <span class="comment"># id of output</span></span><br><span class="line">        <span class="attr">description:</span> <span class="string">&quot;Path to results file&quot;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>inputs</code> 关键字定义名为 <code>file-path</code> 的必需输入，并且包括在未指定任何输入时使用的默认值。</li>
+<li><code>outputs</code> 关键字定义名为 <code>results-file</code> 的输出，指示在何处查找结果。</li>
+</ul>
+<h2 id="基本功能">基本功能</h2>
+<h3 id="使用变量">使用变量</h3>
+<p><strong>可以设置自己的自定义变量，也可以使用 GitHub 自动设置的默认环境变量。</strong></p>
+<h4 id="为单个工作流设置环境变量">为单个工作流设置环境变量</h4>
+<p>若要为单个工作流设置自定义环境变量，可以在工作流文件中使用 <code>env</code> 键对其进行定义。</p>
+<ul>
+<li>整个工作流，方法是在工作流文件的顶层使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions#env"><code>env</code></a>。</li>
+<li>工作流中的作业内容，方法是使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idenv"><code>jobs.&lt;job_id&gt;.env</code></a>。</li>
+<li>作业中的特定步骤，方法是使用 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsenv"><code>jobs.&lt;job_id&gt;.steps[*].env</code></a>。</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Greeting</span> <span class="string">on</span> <span class="string">variable</span> <span class="string">day</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span> <span class="string">workflow_dispatch</span></span><br><span class="line"></span><br><span class="line"><span class="attr">env:</span></span><br><span class="line">    <span class="attr">DAY_OF_WEEK:</span> <span class="string">Monday</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">    <span class="attr">greeting_job:</span></span><br><span class="line">        <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">            <span class="attr">Greeting:</span> <span class="string">Hello</span></span><br><span class="line">        <span class="attr">steps:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;Say Hello Mona it&#x27;s Monday&quot;</span></span><br><span class="line">              <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;$Greeting $First_Name. Today is $DAY_OF_WEEK!&quot;</span></span><br><span class="line">              <span class="attr">env:</span></span><br><span class="line">                  <span class="attr">First_Name:</span> <span class="string">Mona</span></span><br></pre></td></tr></table></figure>
+<h4 id="为多个工作流定义配置变量">为多个工作流定义配置变量</h4>
+<p>可以创建用于多个工作流的配置变量，并且可以在<a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.github.com/zh/actions/learn-github-actions/variables#creating-configuration-variables-for-an-organization">组织</a>、<a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.github.com/zh/actions/learn-github-actions/variables#creating-configuration-variables-for-a-repository">存储库</a>或<a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.github.com/zh/actions/learn-github-actions/variables#creating-configuration-variables-for-an-environment">环境</a>级别定义它们。</p>
+<h4 id="使用上下文访问变量值">使用上下文访问变量值</h4>
+<p>除了运行器环境变量之外，GitHub Actions 还允许使用上下文设置和读取 <code>env</code> 键值。 环境变量和上下文旨在用于工作流程中的不同点。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">env:</span></span><br><span class="line">    <span class="attr">DAY_OF_WEEK:</span> <span class="string">Monday</span> <span class="comment"># 配置变量</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">    <span class="attr">greeting_job:</span></span><br><span class="line">        <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">            <span class="attr">Greeting:</span> <span class="string">Hello</span> <span class="comment"># 配置变量</span></span><br><span class="line">        <span class="attr">steps:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;Say Hello Mona it&#x27;s Monday&quot;</span></span><br><span class="line">              <span class="attr">if:</span> <span class="string">$&#123;&#123;</span> <span class="string">env.DAY_OF_WEEK</span> <span class="string">==</span> <span class="string">&#x27;Monday&#x27;</span> <span class="string">&#125;&#125;</span></span><br><span class="line">              <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;$Greeting $First_Name. Today is $DAY_OF_WEEK!&quot;</span></span><br><span class="line">              <span class="attr">env:</span></span><br><span class="line">                  <span class="attr">First_Name:</span> <span class="string">Mona</span> <span class="comment"># 配置变量</span></span><br></pre></td></tr></table></figure>
+<p>可以使用 <code>vars</code> 上下文在整个工作流中访问配置变量。 如果尚未设置配置变量，则引用该变量的上下文的返回值将为空字符串。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">on:</span></span><br><span class="line">    <span class="attr">workflow_dispatch:</span></span><br><span class="line"><span class="attr">env:</span></span><br><span class="line">    <span class="comment"># Setting an environment variable with the value of a configuration variable</span></span><br><span class="line">    <span class="attr">env_var:</span> <span class="string">$&#123;&#123;</span> <span class="string">vars.ENV_CONTEXT_VAR</span> <span class="string">&#125;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">    <span class="attr">display-variables:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">$&#123;&#123;</span> <span class="string">vars.JOB_NAME</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="comment"># You can use configuration variables with the `vars` context for dynamic jobs</span></span><br><span class="line">        <span class="attr">if:</span> <span class="string">$&#123;&#123;</span> <span class="string">vars.USE_VARIABLES</span> <span class="string">==</span> <span class="string">&#x27;true&#x27;</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">runs-on:</span> <span class="string">$&#123;&#123;</span> <span class="string">vars.RUNNER</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">environment:</span> <span class="string">$&#123;&#123;</span> <span class="string">vars.ENVIRONMENT_STAGE</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">steps:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Use</span> <span class="string">variables</span></span><br><span class="line">              <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">                  echo &quot;repository variable : $REPOSITORY_VAR&quot;</span></span><br><span class="line"><span class="string">                  echo &quot;organization variable : $ORGANIZATION_VAR&quot;</span></span><br><span class="line"><span class="string">                  echo &quot;overridden variable : $OVERRIDE_VAR&quot;</span></span><br><span class="line"><span class="string">                  echo &quot;variable from shell environment : $env_var&quot;</span></span><br><span class="line"><span class="string"></span>              <span class="attr">env:</span></span><br><span class="line">                  <span class="attr">REPOSITORY_VAR:</span> <span class="string">$&#123;&#123;</span> <span class="string">vars.REPOSITORY_VAR</span> <span class="string">&#125;&#125;</span></span><br><span class="line">                  <span class="attr">ORGANIZATION_VAR:</span> <span class="string">$&#123;&#123;</span> <span class="string">vars.ORGANIZATION_VAR</span> <span class="string">&#125;&#125;</span></span><br><span class="line">                  <span class="attr">OVERRIDE_VAR:</span> <span class="string">$&#123;&#123;</span> <span class="string">vars.OVERRIDE_VAR</span> <span class="string">&#125;&#125;</span></span><br><span class="line"></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">$&#123;&#123;</span> <span class="string">vars.HELLO_WORLD_STEP</span> <span class="string">&#125;&#125;</span></span><br><span class="line">              <span class="attr">if:</span> <span class="string">$&#123;&#123;</span> <span class="string">vars.HELLO_WORLD_ENABLED</span> <span class="string">==</span> <span class="string">&#x27;true&#x27;</span> <span class="string">&#125;&#125;</span></span><br><span class="line">              <span class="attr">uses:</span> <span class="string">actions/hello-world-javascript-action@main</span></span><br><span class="line">              <span class="attr">with:</span></span><br><span class="line">                  <span class="attr">who-to-greet:</span> <span class="string">$&#123;&#123;</span> <span class="string">vars.GREET_NAME</span> <span class="string">&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="操作系统">操作系统</h4>
+<p>通过使用 <code>RUNNER_OS</code> 默认环境变量和相应的上下文属性 <code>$&#123;&#123; runner.os &#125;&#125;</code>，可以编写可用于不同操作系统的单个工作流文件。</p>
+<h4 id="在工作流中步骤和作业之间传递值">在工作流中步骤和作业之间传递值</h4>
+<p>如果在作业的某个步骤中生成值，则可以在同一作业的后续步骤中使用该值，方法是<strong>将该值分配给现有或新的环境变量，然后将其写入 <code>GITHUB_ENV</code> 环境文件</strong>。</p>
+<p>环境文件可由操作直接使用，也可以通过使用 <code>run</code> 关键字在工作流文件中通过 shell 命令使用。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">steps:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Set</span> <span class="string">the</span> <span class="string">value</span></span><br><span class="line">      <span class="attr">id:</span> <span class="string">step_one</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          echo &quot;action_state=yellow&quot; &gt;&gt; &quot;$GITHUB_ENV&quot;</span></span><br><span class="line"><span class="string"></span>    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Use</span> <span class="string">the</span> <span class="string">value</span></span><br><span class="line">      <span class="attr">id:</span> <span class="string">step_two</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"></span><br><span class="line">          <span class="string">echo</span> <span class="string">&quot;$<span class="template-variable">&#123;&#123; env.action_state &#125;&#125;</span>&quot;</span> <span class="comment"># This will output &#x27;yellow&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>文档参考：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.github.com/zh/actions/using-workflows/workflow-commands-for-github-actions#environment-files">环境文件</a></p>
+<h4 id="示例">示例</h4>
+<p>如果您需要使用自定义环境变量，可以在 YAML 工作流程文件中设置这些变量。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jobs:</span></span><br><span class="line">    <span class="attr">example-job:</span></span><br><span class="line">        <span class="attr">steps:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Connect</span> <span class="string">to</span> <span class="string">PostgreSQL</span></span><br><span class="line">              <span class="attr">run:</span> <span class="string">node</span> <span class="string">client.js</span></span><br><span class="line">              <span class="attr">env:</span></span><br><span class="line">                  <span class="attr">POSTGRES_HOST:</span> <span class="string">postgres</span></span><br><span class="line">                  <span class="attr">POSTGRES_PORT:</span> <span class="number">5432</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.github.com/zh/actions/learn-github-actions/variables#default-environment-variables">官方变量文档</a></li>
+</ul>
+<h3 id="添加脚本到工作流">添加脚本到工作流</h3>
+<p>官方文档：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun">jobs.&lt;job_id&gt;.steps[*].run</a></p>
+<p>您可以使用操作来运行脚本和 shell 命令，然后在指定的运行器上执行。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jobs:</span></span><br><span class="line">    <span class="attr">example-job:</span></span><br><span class="line">        <span class="attr">steps:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">npm</span> <span class="string">install</span> <span class="string">-g</span> <span class="string">bats</span></span><br></pre></td></tr></table></figure>
+<p>添加本地脚本到工作流</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jobs:</span></span><br><span class="line">    <span class="attr">example-job:</span></span><br><span class="line">        <span class="attr">steps:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Run</span> <span class="string">build</span> <span class="string">script</span></span><br><span class="line">              <span class="attr">run:</span> <span class="string">./.github/scripts/build.sh</span> <span class="comment"># 本地shell脚本</span></span><br><span class="line">              <span class="attr">shell:</span> <span class="string">bash</span></span><br></pre></td></tr></table></figure>
+<p>多行命令</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Clean</span> <span class="string">install</span> <span class="string">dependencies</span> <span class="string">and</span> <span class="string">build</span></span><br><span class="line">  <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">      npm ci</span></span><br><span class="line"><span class="string">      npm run build</span></span><br></pre></td></tr></table></figure>
+<p>指定运行命令的工作目录</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Clean</span> <span class="string">temp</span> <span class="string">directory</span></span><br><span class="line">  <span class="attr">run:</span> <span class="string">rm</span> <span class="string">-rf</span> <span class="string">*</span></span><br><span class="line">  <span class="attr">working-directory:</span> <span class="string">./temp</span></span><br></pre></td></tr></table></figure>
+<h3 id="在作业之间共享数据">在作业之间共享数据</h3>
+<p>如果作业生成(你要与同一工作流中的)另一个作业共享的文件，或者你要保存这些文件供以后参考，则可以将它们作为工件存储在 GitHub 中。</p>
+<p>构件是创建并测试代码时所创建的文件。</p>
+<p>例如，您可以创建一个文件，然后将其作为构件上传。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jobs:</span></span><br><span class="line">    <span class="attr">example-job:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">Save</span> <span class="string">output</span> <span class="comment"># 本次作业名称</span></span><br><span class="line">        <span class="attr">steps:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">shell:</span> <span class="string">bash</span> <span class="comment"># shell</span></span><br><span class="line">              <span class="attr">run:</span> <span class="string">|</span> <span class="comment"># shell 命令生成一个 output.log文件</span></span><br><span class="line">                  <span class="string">expr</span> <span class="number">1</span> <span class="string">+</span> <span class="number">1</span> <span class="string">&gt;</span> <span class="string">output.log</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Upload</span> <span class="string">output</span> <span class="string">file</span></span><br><span class="line">              <span class="attr">uses:</span> <span class="string">actions/upload-artifact@v3</span> <span class="comment"># 使用操作</span></span><br><span class="line">              <span class="attr">with:</span></span><br><span class="line">                  <span class="attr">name:</span> <span class="string">output-log-file</span> <span class="comment"># 上传文件名称</span></span><br><span class="line">                  <span class="attr">path:</span> <span class="string">output.log</span> <span class="comment"># 文件所在路径</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jobs:</span></span><br><span class="line">    <span class="attr">example-job:</span></span><br><span class="line">        <span class="attr">steps:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Download</span> <span class="string">a</span> <span class="string">single</span> <span class="string">artifact</span></span><br><span class="line">              <span class="attr">uses:</span> <span class="string">actions/download-artifact@v3</span> <span class="comment"># 下载文件操作</span></span><br><span class="line">              <span class="attr">with:</span></span><br><span class="line">                  <span class="attr">name:</span> <span class="string">output-log-file</span> <span class="comment"># 下载文件名称</span></span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://doublew2w.cn">DoubleW2w</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://doublew2w.cn/posts/d5bae63e.html">https://doublew2w.cn/posts/d5bae63e.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://doublew2w.cn" target="_blank">DoubleW2w🍅</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Github-Actions/">Github Actions</a></div><div class="post_share"><div class="social-share" data-image="/images/default_cover_bg1.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/butterfly-extsrc/1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdnjs.cloudflare.com/ajax/libs/butterfly-extsrc/1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://doublew2w-myblogimages.oss-cn-hangzhou.aliyuncs.com/img/alipay.png" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://doublew2w-myblogimages.oss-cn-hangzhou.aliyuncs.com/img/alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li><li class="reward-item"><a href="https://doublew2w-myblogimages.oss-cn-hangzhou.aliyuncs.com/img/weixinpay.png" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://doublew2w-myblogimages.oss-cn-hangzhou.aliyuncs.com/img/weixinpay.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/2013454d.html" title="Markdown语法与外挂标签写法汇总"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/default_cover_bg3.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Markdown语法与外挂标签写法汇总</div></div></a></div><div class="next-post pull-right"><a href="/posts/1060da4.html" title="测试文件生成名称和链接文章"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/default_cover_bg1.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">测试文件生成名称和链接文章</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">GitHub Action</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%86%E8%A7%A3-GitHub-Actions"><span class="toc-text">了解 GitHub Actions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-GitHub-Action"><span class="toc-text">什么是 GitHub Action</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GitHub-Actions-%E6%9C%89%E4%BB%80%E4%B9%88%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-text">GitHub Actions 有什么组成部分</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-text">工作流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6"><span class="toc-text">事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A"><span class="toc-text">作业</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C"><span class="toc-text">操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E5%99%A8"><span class="toc-text">运行器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-text">创建工作流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E8%AF%AD%E6%B3%95"><span class="toc-text">工作流语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E6%B4%BB%E5%8A%A8"><span class="toc-text">查看工作流程活动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E5%92%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E6%93%8D%E4%BD%9C"><span class="toc-text">查找和自定义操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE"><span class="toc-text">查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%93%8D%E4%BD%9C%E5%88%B0%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E4%B8%AD"><span class="toc-text">添加操作到工作流程中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E%E5%B8%82%E5%9C%BA%E6%B7%BB%E5%8A%A0"><span class="toc-text">从市场添加</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E%E7%9B%B8%E5%90%8C%E4%BB%93%E5%BA%93%E6%B7%BB%E5%8A%A0"><span class="toc-text">从相同仓库添加</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E%E4%B8%8D%E5%90%8C%E4%BB%93%E5%BA%93%E6%B7%BB%E5%8A%A0"><span class="toc-text">从不同仓库添加</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%95%E7%94%A8-docker-Hub-%E4%B8%8A%E7%9A%84%E5%AE%B9%E5%99%A8"><span class="toc-text">引用 docker Hub 上的容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E6%93%8D%E4%BD%9C%E4%BD%BF%E7%94%A8%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA"><span class="toc-text">对操作使用输入和输出</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD"><span class="toc-text">基本功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F"><span class="toc-text">使用变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E5%8D%95%E4%B8%AA%E5%B7%A5%E4%BD%9C%E6%B5%81%E8%AE%BE%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">为单个工作流设置环境变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E5%A4%9A%E4%B8%AA%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE%E5%8F%98%E9%87%8F"><span class="toc-text">为多个工作流定义配置变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E8%AE%BF%E9%97%AE%E5%8F%98%E9%87%8F%E5%80%BC"><span class="toc-text">使用上下文访问变量值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">操作系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8%E5%B7%A5%E4%BD%9C%E6%B5%81%E4%B8%AD%E6%AD%A5%E9%AA%A4%E5%92%8C%E4%BD%9C%E4%B8%9A%E4%B9%8B%E9%97%B4%E4%BC%A0%E9%80%92%E5%80%BC"><span class="toc-text">在工作流中步骤和作业之间传递值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%84%9A%E6%9C%AC%E5%88%B0%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-text">添加脚本到工作流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E4%BD%9C%E4%B8%9A%E4%B9%8B%E9%97%B4%E5%85%B1%E4%BA%AB%E6%95%B0%E6%8D%AE"><span class="toc-text">在作业之间共享数据</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('/images/default_cover_bg1.webp')"><div id="footer-wrap"><div class="copyright">&copy;2023 By DoubleW2w</div><div class="footer_custom_text">I wish you to become your own sun, no need to rely on who's light.<p><a target="_blank" href="https://hexo.io/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用butterfly"></a>&nbsp;<a target="_blank" href="https://www.jsdelivr.com/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&logo=jsDelivr" title="本站使用JsDelivr为静态资源提供CDN加速"></a> &nbsp;<a target="_blank" href="https://vercel.com/ " rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Hosted-Vervel-brightgreen?style=flat&logo=Vercel" title="本站采用双线部署，默认线路托管于Vercel"></a>&nbsp;<a target="_blank" href="https://vercel.com/ " rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&logo=Codio" title="本站采用双线部署，联通线路托管于Coding"></a>&nbsp;<a target="_blank" href="https://github.com/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.17/fancybox/fancybox.umd.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.2.0/instantpage.min.js" type="module"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/17.8.3/lazyload.iife.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/node-snackbar/0.1.16/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-railway.doublew2w.cn',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-railway.doublew2w.cn',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.staticfile.org/twikoo/1.6.16/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script data-pace-options='{ "restartOnRequestAfter":false,"eventLag":false}' src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script><script src="https://cdn1.tianli0.top/gh/zhheo/JS-Heo@main/bb/showbb_in_index.js" data-pjax="" defer=""></script><script src="https://cdnjs.cloudflare.com/ajax/libs/butterfly-extsrc/1.1.3/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.17.0/algoliasearch-lite.umd.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/instantsearch.js/4.55.0/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>
